@@ -18,9 +18,7 @@ It is necessary to install -> https://golang.org/
 
 - [github.com/gin-gonic/gin] Gin is a web framework written in Go (Golang). It features a martini-like API with performance that is up to 40 times faster thanks to httprouter. If you need performance and good productivity, you will love Gin.
 - [github.com/gin-contrib/pprof] Package pprof serves via its HTTP server runtime profiling data in the format expected by the pprof visualization tool.
-- [gorm.io/gorm] This is an orm framework and is used to be connected to sql server database //Modificar ahora es mongo
-- [github.com/swaggo/gin-swagger] [github.com/swaggo/files] This is a open api for documentation a some tests
-- 
+- [github.com/swaggo/gin-swagger] [github.com/swaggo/files] This is a open api for documentation a some tests 
 
 # Project Structure 🧱
 ```

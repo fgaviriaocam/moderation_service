@@ -4,6 +4,7 @@ import (
 	"log"
 	"moderation_service/application"
 	"moderation_service/docs"
+	"moderation_service/domain/service"
 	"moderation_service/interfaces/middleware"
 	"os"
 
@@ -24,6 +25,7 @@ func InitServer() Server {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	application.InitModerationController(router)
 	serverImpl.router = router
+	service.LoadWordInMemory()
 	return serverImpl
 }
 

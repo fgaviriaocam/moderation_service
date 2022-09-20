@@ -12,6 +12,9 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 var (
@@ -34,7 +37,7 @@ func InitModerationServiceImpl() *ModerationServiceImpl {
 	}
 }
 
-func (r *ModerationServiceImpl) ModerationProccess(moderation models.Moderation) (interface{}, models.Response) {
+func (r *ModerationServiceImpl) ModerationProccess(moderation models.Moderation, disregarded bool) (interface{}, models.Response) {
 
 	if len(moderation.Input) > constants.MaxLenght {
 		return nil, models.Response{
@@ -43,12 +46,30 @@ func (r *ModerationServiceImpl) ModerationProccess(moderation models.Moderation)
 		}
 	}
 
-	moderation.LangProccesed = DetectLanguage(moderation.Input)
-	moderation.Ouput = Chunks(moderation.Input)
+	moderation.ID = primitive.NewObjectID()
+	if disregarded {
+		go r.Process(moderation)
 
-	return moderation, models.Response{
+		return moderation.ID, models.Response{
+			Status: http.StatusOK,
+		}
+	}
+
+	return Make(moderation), models.Response{
 		Status: http.StatusOK,
 	}
+}
+
+func (r *ModerationServiceImpl) Process(moderation models.Moderation) {
+	r.moderationRepository.Moderation(Make(moderation))
+}
+
+func Make(moderation models.Moderation) models.Moderation {
+	moderation.LangProccesed = DetectLanguage(moderation.Input)
+	moderation.Ouput = Chunks(moderation.Input)
+	moderation.CreatedDate = time.Now()
+
+	return moderation
 }
 
 func Chunks(c string) string {
@@ -165,8 +186,8 @@ func DetectLanguage(t string) []models.LangProccesed {
 		close(c)
 	}()
 
-	for k, l := range languages {
-		languageProccesor(c, &w, k, l, strings.Fields(t))
+	for k, _ := range languages {
+		languageProccesor(c, &w, k, strings.Fields(t))
 	}
 
 	langProccesed := []models.LangProccesed{}
@@ -176,25 +197,26 @@ func DetectLanguage(t string) []models.LangProccesed {
 	return langProccesed
 }
 
-func languageProccesor(c chan models.LangProccesed, w *sync.WaitGroup, k, path string, text []string) {
+func languageProccesor(c chan models.LangProccesed, w *sync.WaitGroup, k string, text []string) {
 	var (
-		words     []string
+		//words     []string
 		proccesed models.LangProccesed
 		total     float64
 	)
 
-	//if readWord[k] == nil {
-	byteValue, _ := ioutil.ReadFile(path)
-	json.Unmarshal([]byte(byteValue), &words)
+	/*if readWord[k] == nil {
+		byteValue, _ := ioutil.ReadFile(path)
+		json.Unmarshal([]byte(byteValue), &words)
+		readWord[k] = words
+	}*/
+
 	total = float64(len(text))
-	readWord[k] = words
-	//}
 
 	go func() {
 		defer w.Done()
 
 		for _, t := range text {
-			for _, wo := range words {
+			for _, wo := range readWord[k] {
 				if t == wo {
 					proccesed.Calc++
 					proccesed.Language = k
@@ -206,4 +228,20 @@ func languageProccesor(c chan models.LangProccesed, w *sync.WaitGroup, k, path s
 		c <- proccesed
 	}()
 
+}
+
+func LoadWordInMemory() {
+	var words []string
+	for k, v := range languages {
+		if readWord[k] == nil {
+			byteValue, _ := ioutil.ReadFile(v)
+			json.Unmarshal([]byte(byteValue), &words)
+			readWord[k] = words
+		}
+	}
+}
+
+func LoadKnowledgeInMemory() {
+	// Se realizaría una carga de las palabras soeces en memoria y
+	// un endpoint para que se actualicen cuando hayan cambios
 }

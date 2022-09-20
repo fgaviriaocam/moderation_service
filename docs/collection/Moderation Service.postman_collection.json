@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "fe51a7ab-43c0-407a-8ec4-ef80750bac04",
+		"name": "Moderation Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9803429"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/moderation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "disregarded",
+						"value": "true",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\":\"Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola Putos, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta Hola putoey, Cómo están? puto. Les quiero decir que son unos perros mala agradecidos. Espero que se mueran pronto, son unos hijos de puta \",\n    \"application_id\":\"test\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/moderation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"moderation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

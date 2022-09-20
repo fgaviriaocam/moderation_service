@@ -14,9 +14,9 @@ type ModerationRepositoryImpl struct {
 
 func (r *ModerationRepositoryImpl) Moderation(o models.Moderation) (interface{}, error) {
 
-	order := r.client.Database("fury_service").Collection("moderation")
+	moderation := r.client.Database("fury_service").Collection("moderation")
 	doc, _ := utils.ToDoc(o)
-	result, err := order.InsertOne(context.TODO(), doc)
+	result, err := moderation.InsertOne(context.TODO(), doc)
 
 	return result.InsertedID, err
 }
